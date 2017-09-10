@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -9,26 +6,45 @@ import java.util.ArrayList;
  */
 public class ScanDirReadJSON {
 
-    String path;
-    String fileExt;
 
 
-    public void getPathAndExt(ArrayList<String> list) {
-        for (int i = 0; i < list.size(); i++) {
-            path = list.get(0);
-            fileExt = list.get(1);
-        }
-    }
+    //    public String path;
+//  public String fileExt;
+    public String[] words;
+    public String uppercase;
+    public String lowercase;
+
+//    public void getPathAndExt(ArrayList<String> list) {
+//        list = paramXML.getDirExt();
+//        for (int i = 0; i < list.size(); i++) {
+//            path = list.get(0);
+//            fileExt = list.get(1);
+//        }
+//    }
 
     public void scanDir(String dir, String ext) throws FileNotFoundException {
-        BufferedReader reader = new BufferedReader(new FileReader(path));
+        ReadParamXML paramXML = new ReadParamXML();
+        BufferedReader reader = new BufferedReader(new FileReader(paramXML.getPath()));
         File directory = new File(dir);
         File[] fList = directory.listFiles();
 
         for (File file : fList) {
             if (file.isFile()) {
-                if (file.getAbsolutePath().endsWith(".txt")) {
-
+                if (file.getAbsolutePath().endsWith(paramXML.getFileExt())) {
+                    try {
+                        BufferedReader br = new BufferedReader(new FileReader(file));
+                        String ln = null;
+                        while ((ln = br.readLine()) != null) {
+                            words = ln.split(" ");
+                            for (int i = 0; i < words.length; i++) {
+                                if (words[i].equals(words[i].toLowerCase())) {
+                                    lowercase = words[i];
+                                } else uppercase = words[i];
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

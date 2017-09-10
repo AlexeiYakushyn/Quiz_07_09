@@ -1,6 +1,7 @@
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -12,10 +13,9 @@ public class Main {
         ReadParamXML paramXML = new ReadParamXML();
         ScanDirReadJSON readJSON = new ScanDirReadJSON();
 
+        System.out.println(paramXML.getPath());
         try {
-
-            readJSON.getPathAndExt(paramXML.getDataFromXML());
-
+            paramXML.getDataFromXML();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -23,7 +23,16 @@ public class Main {
         } catch (SAXException e) {
             e.printStackTrace();
         }
-        System.out.println((readJSON.path + " " + readJSON.fileExt));
+
+        try {
+            readJSON.scanDir(paramXML.getPath(), paramXML.getFileExt());
+            System.out.println(paramXML.getFileExt());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(readJSON.lowercase + " " + readJSON.uppercase);
 
     }
 }

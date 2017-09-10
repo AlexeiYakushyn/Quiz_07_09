@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 public class ReadParamXML {
 
-    File getFile = new File("/home/java2/IdeaProjects/Quiz_2/quiz/src/conf.xml");
-    ArrayList<String> dirExt = new ArrayList<>();
-    String path;
-    String fileExt;
+    private File getFile = new File("D:\\myjava\\com.hillel.core\\Quiz_07_09\\src\\conf.xml");
+    private ArrayList<String> dirExt = new ArrayList<>();
+    private String path;
+    private String fileExt;
 
     public ArrayList<String> getDataFromXML() throws ParserConfigurationException, IOException, SAXException {
 
@@ -49,7 +49,18 @@ public class ReadParamXML {
                 dirExt.add(0, fileExt);
             }
         }
+        return dirExt;
+    }
 
+    public String getPath(ArrayList<String> list) {
+        return path;
+    }
+
+    public String getFileExt() {
+        return fileExt;
+    }
+
+    public ArrayList<String> getDirExt() {
         return dirExt;
     }
 }
