@@ -18,11 +18,20 @@ import java.util.ArrayList;
 public class ReadParamXML {
 
     private File getFile = new File("D:\\myjava\\com.hillel.core\\Quiz_07_09\\src\\conf.xml");
-    private ArrayList<String> dirExt = new ArrayList<>();
     private String path;
     private String fileExt;
 
-    public ArrayList<String> getDataFromXML() throws ParserConfigurationException, IOException, SAXException {
+
+    public ReadParamXML(String path, String fileExt) {
+        this.path = path;
+        this.fileExt = fileExt;
+    }
+
+    public ReadParamXML() {
+
+    }
+
+    public ReadParamXML getDataFromXML() throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilderFactory dbFact = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFact.newDocumentBuilder();
@@ -32,9 +41,13 @@ public class ReadParamXML {
         NodeList nodeList = doc.getElementsByTagName("configuration");
 
         for (int i = 0; i < nodeList.getLength(); i++) {
+
             Node nList = nodeList.item(i);
+
             if (nList.getNodeType() == Node.ELEMENT_NODE) {
+
                 Element element = (Element) nList;
+
                 path = element
                         .getElementsByTagName("directory")
                         .item(0)
@@ -44,23 +57,16 @@ public class ReadParamXML {
                         .getElementsByTagName("extension")
                         .item(0)
                         .getTextContent();
-
-                dirExt.add(0, path);
-                dirExt.add(0, fileExt);
             }
         }
-        return dirExt;
+        return new ReadParamXML(path, fileExt);
     }
 
-    public String getPath(ArrayList<String> list) {
+    public String getPath() {
         return path;
     }
 
     public String getFileExt() {
         return fileExt;
-    }
-
-    public ArrayList<String> getDirExt() {
-        return dirExt;
     }
 }
