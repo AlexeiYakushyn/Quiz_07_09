@@ -6,33 +6,20 @@ import java.util.ArrayList;
  */
 public class ScanDirReadJSON {
 
-
-
-    //    public String path;
-//  public String fileExt;
     public String[] words;
     public String uppercase;
     public String lowercase;
 
-//    public void getPathAndExt(ArrayList<String> list) {
-//        list = paramXML.getDirExt();
-//        for (int i = 0; i < list.size(); i++) {
-//            path = list.get(0);
-//            fileExt = list.get(1);
-//        }
-//    }
-
     public void scanDir(String dir, String ext) throws FileNotFoundException {
         ReadParamXML paramXML = new ReadParamXML();
-        BufferedReader reader = new BufferedReader(new FileReader(paramXML.getPath()));
         File directory = new File(dir);
         File[] fList = directory.listFiles();
 
-        for (File file : fList) {
-            if (file.isFile()) {
-                if (file.getAbsolutePath().endsWith(paramXML.getFileExt())) {
+        for (int j = 0; j < fList.length; j++) {
+            if (fList[j].isFile()) {
+                if (fList[j].getAbsolutePath().endsWith(ext)) {
                     try {
-                        BufferedReader br = new BufferedReader(new FileReader(file));
+                        BufferedReader br = new BufferedReader(new FileReader(fList[j]));
                         String ln = null;
                         while ((ln = br.readLine()) != null) {
                             words = ln.split(" ");

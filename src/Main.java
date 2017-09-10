@@ -13,9 +13,15 @@ public class Main {
         ReadParamXML paramXML = new ReadParamXML();
         ScanDirReadJSON readJSON = new ScanDirReadJSON();
 
-        System.out.println(paramXML.getPath());
         try {
-            paramXML.getDataFromXML();
+
+            paramXML.getDataFromXML("D:\\myjava\\com.hillel.core\\Quiz_07_09\\src\\conf.xml");
+            System.out.println(paramXML.getPath());
+            System.out.println(paramXML.getFileExt());
+
+            readJSON.scanDir(paramXML.getPath(), paramXML.getFileExt());
+            System.out.println(readJSON.lowercase + " " + readJSON.uppercase);
+
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -23,16 +29,5 @@ public class Main {
         } catch (SAXException e) {
             e.printStackTrace();
         }
-
-        try {
-            readJSON.scanDir(paramXML.getPath(), paramXML.getFileExt());
-            System.out.println(paramXML.getFileExt());
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(readJSON.lowercase + " " + readJSON.uppercase);
-
     }
 }

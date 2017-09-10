@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class ReadParamXML {
 
-    private File getFile = new File("D:\\myjava\\com.hillel.core\\Quiz_07_09\\src\\conf.xml");
     private String path;
     private String fileExt;
 
@@ -31,11 +30,11 @@ public class ReadParamXML {
 
     }
 
-    public ReadParamXML getDataFromXML() throws ParserConfigurationException, IOException, SAXException {
+    public ReadParamXML getDataFromXML(String filePath) throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilderFactory dbFact = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFact.newDocumentBuilder();
-        Document doc = dBuilder.parse(getFile);
+        Document doc = dBuilder.parse(filePath);
         doc.getDocumentElement().normalize();
 
         NodeList nodeList = doc.getElementsByTagName("configuration");
