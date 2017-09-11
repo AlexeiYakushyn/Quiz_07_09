@@ -4,16 +4,19 @@ import java.util.ArrayList;
 /**
  * Created by java2 on 07.09.17.
  */
-public class ScanDirReadJSON {
+public class ScanDirRead {
 
-    public String[] words;
-    public String uppercase;
-    public String lowercase;
+    private ArrayList<String> words;
+
+    public ArrayList<String> getWords() {
+        return words;
+    }
 
     public void scanDir(String dir, String ext) throws FileNotFoundException {
         ReadParamXML paramXML = new ReadParamXML();
         File directory = new File(dir);
         File[] fList = directory.listFiles();
+        words = new ArrayList<String>();
 
         for (int j = 0; j < fList.length; j++) {
             if (fList[j].isFile()) {
@@ -22,12 +25,7 @@ public class ScanDirReadJSON {
                         BufferedReader br = new BufferedReader(new FileReader(fList[j]));
                         String ln = null;
                         while ((ln = br.readLine()) != null) {
-                            words = ln.split(" ");
-                            for (int i = 0; i < words.length; i++) {
-                                if (words[i].equals(words[i].toLowerCase())) {
-                                    lowercase = words[i];
-                                } else uppercase = words[i];
-                            }
+                            words.add(ln);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
