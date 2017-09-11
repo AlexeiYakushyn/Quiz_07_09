@@ -16,14 +16,14 @@ public class Main {
 
 
         try {
-            paramXML.getDataFromXML("E:\\ProgrammFiles\\hillel\\Quiz_07_09\\src\\conf.xml");
+            paramXML.getDataFromXML("/home/java2/IdeaProjects/Quiz_07_09/src/conf.xml");
             System.out.println(paramXML.getPath());
             System.out.println(paramXML.getFileExt());
 
             readJSON.scanDir(paramXML.getPath(), paramXML.getFileExt());
             System.out.println(readJSON.getWords());
             jsn.splitStrings(readJSON.getWords());
-            //System.out.println(jsn.getUppercase() + " " + jsn.getLowercase());
+            System.out.println(jsn.getUppercase() + " " + jsn.getLowercase());
             json.createJSONFile(jsn.getUppercase(), jsn.getLowercase());
 
         } catch (ParserConfigurationException e) {
